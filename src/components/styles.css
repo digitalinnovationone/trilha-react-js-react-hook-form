@@ -1,0 +1,61 @@
+.container,
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 0.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  margin: 0 0 2rem;
+  font-size: 0.875rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.form input,
+.form select,
+.form textarea {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid lightgray;
+  font-family: inherit;
+
+  margin-bottom: 1rem;
+}
+
+.form label {
+  font-size: 0.875rem;
+}
+
+.form .food-preferences {
+  display: flex;
+  flex-direction: column;
+}
+
+.form .food-preferences label {
+  cursor: pointer;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 1.25rem 0;
+}
+
+.button {
+  background-color: black;
+  color: #fff;
+  font-weight: lighter;
+  margin-top: 1rem;
+}
+
