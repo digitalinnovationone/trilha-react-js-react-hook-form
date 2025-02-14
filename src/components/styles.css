@@ -28,7 +28,11 @@
   border-radius: 0.25rem;
   border: 1px solid lightgray;
   font-family: inherit;
+}
 
+.form input:not(.field-with-error),
+.form select:not(.field-with-error),
+.form textarea:not(.field-with-error) {
   margin-bottom: 1rem;
 }
 
@@ -57,5 +61,11 @@
   color: #fff;
   font-weight: lighter;
   margin-top: 1rem;
+}
+
+.error {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  color: rgb(232, 54, 54);
 }
 

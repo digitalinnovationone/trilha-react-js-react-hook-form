@@ -16,7 +16,18 @@ interface FormData {
 }
 
 const EventForm = () => {
-  const { register } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const onSubmit = (data: FormData) => {
+    console.log("Dados enviados:", data);
+    alert("Inscrição realizada com sucesso!");
+  };
+
+  console.log(errors);
 
   return (
     <div className="container">
@@ -24,22 +35,62 @@ const EventForm = () => {
       <p className="subtitle">
         Preencha as informações abaixo para adquirir seu ingresso.
       </p>
-      <form className="form">
-        <input placeholder="Nome" {...register("name")} />
-        <input placeholder="CPF" maxLength={14} {...register("cpf")} />
-        <input placeholder="E-mail" type="email" {...register("email")} />
+      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <input
+          className={errors.name ? "field-with-error" : ""}
+          placeholder="Nome"
+          {...register("name", {
+            required: "O nome é obrigatório",
+          })}
+        />
+        {errors.name && <p className="error">{errors.name.message}</p>}
 
-        <select {...register("ticketType")}>
-          <option value="" disabled selected>
+        <input
+          placeholder="CPF"
+          className={errors.cpf ? "field-with-error" : ""}
+          maxLength={14}
+          {...register("cpf", {
+            required: "O CPF é obrigatório",
+          })}
+        />
+        {errors.cpf && <p className="error">{errors.cpf.message}</p>}
+
+        <input
+          placeholder="E-mail"
+          className={errors.email ? "field-with-error" : ""}
+          type="email"
+          {...register("email", {
+            required: "O e-mail é obrigatório",
+          })}
+        />
+        {errors.email && <p className="error">{errors.email.message}</p>}
+
+        <select
+          defaultValue=""
+          className={errors.ticketType ? "field-with-error" : ""}
+          {...register("ticketType", {
+            required: "Selecione um tipo de ingresso",
+          })}
+        >
+          <option value="" disabled>
             Tipo de ingresso
           </option>
           <option value="free">Gratuito</option>
           <option value="vip">VIP</option>
           <option value="premium">Premium</option>
         </select>
+        {errors.ticketType && (
+          <p className="error">{errors.ticketType.message}</p>
+        )}
 
-        <select {...register("tshirtSize")}>
-          <option value="" disabled selected>
+        <select
+          defaultValue=""
+          className={errors.tshirtSize ? "field-with-error" : ""}
+          {...register("tshirtSize", {
+            required: "Escolha um tamanho",
+          })}
+        >
+          <option value="" disabled>
             Tamanho da camiseta
           </option>
           <option value="P">P</option>
@@ -47,6 +98,9 @@ const EventForm = () => {
           <option value="G">G</option>
           <option value="GG">GG</option>
         </select>
+        {errors.tshirtSize && (
+          <p className="error">{errors.tshirtSize.message}</p>
+        )}
 
         <div className="divider" />
 
