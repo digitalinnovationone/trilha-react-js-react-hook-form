@@ -1,6 +1,23 @@
+import { useForm } from "react-hook-form";
 import "./styles.css";
 
+interface FormData {
+  name: string;
+  cpf: string;
+  email: string;
+  ticketType: "free" | "vip" | "premium";
+  tshirtSize: "P" | "M" | "G" | "GG";
+  food?: {
+    vegan?: boolean;
+    vegetarian?: boolean;
+    glutenFree?: boolean;
+  };
+  comments?: string;
+}
+
 const EventForm = () => {
+  const { register } = useForm<FormData>();
+
   return (
     <div className="container">
       <h1 className="title">Inscrição DIO Community</h1>
@@ -8,11 +25,11 @@ const EventForm = () => {
         Preencha as informações abaixo para adquirir seu ingresso.
       </p>
       <form className="form">
-        <input placeholder="Nome" />
-        <input placeholder="CPF" maxLength={14} />
-        <input placeholder="E-mail" />
+        <input placeholder="Nome" {...register("name")} />
+        <input placeholder="CPF" maxLength={14} {...register("cpf")} />
+        <input placeholder="E-mail" type="email" {...register("email")} />
 
-        <select>
+        <select {...register("ticketType")}>
           <option value="" disabled selected>
             Tipo de ingresso
           </option>
@@ -21,7 +38,7 @@ const EventForm = () => {
           <option value="premium">Premium</option>
         </select>
 
-        <select>
+        <select {...register("tshirtSize")}>
           <option value="" disabled selected>
             Tamanho da camiseta
           </option>
@@ -38,19 +55,24 @@ const EventForm = () => {
         </label>
         <div className="food-preferences">
           <label>
-            <input type="checkbox" /> Vegano
+            <input type="checkbox" {...register("food.vegan")} /> Vegano
           </label>
           <label>
-            <input type="checkbox" /> Vegetariano
+            <input type="checkbox" {...register("food.vegetarian")} />{" "}
+            Vegetariano
           </label>
           <label>
-            <input type="checkbox" /> Sem glúten
+            <input type="checkbox" {...register("food.glutenFree")} /> Sem
+            glúten
           </label>
         </div>
 
         <div className="divider" />
 
-        <textarea placeholder="Comentários adicionais" />
+        <textarea
+          placeholder="Comentários adicionais"
+          {...register("comments")}
+        />
 
         <button type="submit" className="button">
           Enviar Inscrição
