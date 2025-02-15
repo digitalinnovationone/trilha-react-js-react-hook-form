@@ -21,12 +21,31 @@ const EventForm = () => {
     register,
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
     console.log("Dados enviados:", data);
     alert("Inscrição realizada com sucesso!");
+  };
+
+  const handleCPFChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let value = event.target.value.replace(/\D/g, "").slice(0, 11);
+
+    if (value.length > 3) {
+      value = value.replace(/^(\d{3})(\d)/, "$1.$2");
+    }
+
+    if (value.length > 6) {
+      value = value.replace(/^(\d{3}).(\d{3})(\d)/, "$1.$2.$3");
+    }
+
+    if (value.length > 9) {
+      value = value.replace(/^(\d{3}).(\d{3}).(\d{3})(\d)/, "$1.$2.$3-$4");
+    }
+
+    setValue("cpf", value);
   };
 
   console.log("EventForm rendered.");
@@ -65,6 +84,7 @@ const EventForm = () => {
               message: "Formato de CPF inválido",
             },
           })}
+          onChange={handleCPFChange}
         />
         {errors.cpf && <p className="error">{errors.cpf.message}</p>}
 
