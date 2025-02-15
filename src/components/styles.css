@@ -36,6 +36,10 @@
   margin-bottom: 1rem;
 }
 
+.form .field-with-error {
+  border: 1px solid rgb(232, 54, 54);
+}
+
 .form label {
   font-size: 0.875rem;
 }
@@ -67,5 +71,16 @@
   margin: 0 0 1rem;
   font-size: 0.875rem;
   color: rgb(232, 54, 54);
+}
+
+.ticket-price {
+  background-color: #daffda;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-align: center;
+  border: 1px dashed rgba(60, 143, 89, 0.8);
+  color: rgba(60, 143, 89, 0.8);
 }
 

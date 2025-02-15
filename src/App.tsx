@@ -2,7 +2,11 @@ import "./App.css";
 import EventForm from "./components/EventForm";
 
 function App() {
-  return <EventForm />;
+  return (
+    <div>
+      <EventForm />
+    </div>
+  );
 }
 
 export default App;

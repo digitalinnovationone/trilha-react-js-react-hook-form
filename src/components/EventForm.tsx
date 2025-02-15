@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import "./styles.css";
+import ViewPrice from "./ViewPrice";
 
-interface FormData {
+export interface FormData {
   name: string;
   cpf: string;
   email: string;
@@ -19,6 +20,7 @@ const EventForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormData>();
 
@@ -141,6 +143,8 @@ const EventForm = () => {
           placeholder="Comentários adicionais"
           {...register("comments")}
         />
+
+        <ViewPrice form={control} />
 
         <button type="submit" className="button">
           Enviar Inscrição
