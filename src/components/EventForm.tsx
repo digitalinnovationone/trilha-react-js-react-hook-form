@@ -27,7 +27,7 @@ const EventForm = () => {
     alert("Inscrição realizada com sucesso!");
   };
 
-  console.log(errors);
+  console.log("EventForm rendered.");
 
   return (
     <div className="container">
@@ -41,6 +41,10 @@ const EventForm = () => {
           placeholder="Nome"
           {...register("name", {
             required: "O nome é obrigatório",
+            minLength: {
+              value: 3,
+              message: "Mínimo de 3 caracteres",
+            },
           })}
         />
         {errors.name && <p className="error">{errors.name.message}</p>}
@@ -48,9 +52,16 @@ const EventForm = () => {
         <input
           placeholder="CPF"
           className={errors.cpf ? "field-with-error" : ""}
-          maxLength={14}
           {...register("cpf", {
             required: "O CPF é obrigatório",
+            maxLength: {
+              value: 14,
+              message: "Máximo de 14 caracteres",
+            },
+            pattern: {
+              value: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+              message: "Formato de CPF inválido",
+            },
           })}
         />
         {errors.cpf && <p className="error">{errors.cpf.message}</p>}
@@ -58,9 +69,12 @@ const EventForm = () => {
         <input
           placeholder="E-mail"
           className={errors.email ? "field-with-error" : ""}
-          type="email"
           {...register("email", {
             required: "O e-mail é obrigatório",
+            pattern: {
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              message: "Formato de e-mail inválido",
+            },
           })}
         />
         {errors.email && <p className="error">{errors.email.message}</p>}
